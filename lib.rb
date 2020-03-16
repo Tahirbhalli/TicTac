@@ -53,8 +53,8 @@ class Tic < Features
 
     @map[position[0]][position[1]] = player.simble
     if player.isover?(@map) == true
-        display_map 
-        return true
+      display_map
+      return true
     end
     false
   end
@@ -65,10 +65,21 @@ class Player < Tic
   end
 
   def turn
+    puts 'enter in range of 1-3'
     print 'enter the row index'
     x = gets.chomp.to_i
     print 'enter the colomn index'
     y = gets.chomp.to_i
-    [x, y]
+    indexes = [x, y]
+    i = 0
+    while i < 2
+      return if indexes[i] < 1 or indexes[i] > 3
+
+      indexes[i] = indexes[i] - 1 if indexes[i] == 1
+      indexes[i] = indexes[i] + 1 if indexes[i] == 3
+      i += 1
+    end
+    puts indexes
+    indexes
   end
 end
