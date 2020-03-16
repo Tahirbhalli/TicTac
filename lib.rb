@@ -7,22 +7,20 @@ class Features
             [' ', '|', ' ', '|', ' ']]
   end
 
-  def isover?(_map); end
+  def isover?(_map)
+    true
+  end
 end
 class Tic < Features
   protected
 
   @map = []
   @simble = ''
-  def setsimble(value)
-    @simble = value
-  end
+  attr_writer :simble
 
   public
 
-  def getsimble
-    @simble
-  end
+  attr_reader :simble, :map
 
   def initialize
     @map = super @map
@@ -38,15 +36,17 @@ class Tic < Features
   end
 
   def players_simble(players)
-    players[0].setsimble '*'
-    players[1].setsimble '$'
+    players[0].simble = '*'
+    players[1].simble = '$'
   end
 
   def turn(player)
-    position = player.turn
-    turn(player) if @map[position[0]][position[1]] != ' '
-    @map[position[0]][position[1]] = player.getsimble
     display_map
+    position = player.turn
+    return turn(player) if @map[position[0]][position[1]] != ' '
+
+    @map[position[0]][position[1]] = player.simble
+    player.isover?(@map)
   end
 end
 class Player < Tic
@@ -61,13 +61,4 @@ class Player < Tic
     y = gets.chomp.to_i
     [x, y]
   end
-end
-obj = Tic.new
-player1 = Player.new
-player2 = Player.new
-obj.players_simble([player1, player2])
-obj.display_map
-loop do
-  obj.turn(player1)
-  obj.turn(player2)
 end
