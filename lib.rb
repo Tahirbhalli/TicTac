@@ -7,8 +7,14 @@ class Features
             [' ', '|', ' ', '|', ' ']]
   end
 
-  def isover?(_map)
-    true
+  def isover?(map)
+    combinations = [[[0, 0], [0, 2], [0, 4]], [[2, 0], [2, 2], [2, 4]], [[4, 0], [4, 2], [4, 4]], [[0, 0], [2, 0], [4, 0]],
+                    [[0, 2], [2, 2], [4, 2]], [[0, 4], [2, 4], [4, 4]], [[0, 0], [2, 2], [4, 4]], [[0, 4], [2, 2], [4, 0]]]
+    combinations.each do |x|
+      next if map[x[0][0]][x[0][1]] == ' ' or map[x[1][0]][x[1][1]] == ' ' or map[x[2][0]][x[2][1]] == ' '
+      return true if map[x[0][0]][x[0][1]] == map[x[1][0]][x[1][1]] && map[x[1][0]][x[1][1]] == map[x[2][0]][x[2][1]]
+    end
+    false
   end
 end
 class Tic < Features
@@ -46,7 +52,11 @@ class Tic < Features
     return turn(player) if @map[position[0]][position[1]] != ' '
 
     @map[position[0]][position[1]] = player.simble
-    player.isover?(@map)
+    if player.isover?(@map) == true
+        display_map 
+        return true
+    end
+    false
   end
 end
 class Player < Tic
