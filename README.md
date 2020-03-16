@@ -1,11 +1,9 @@
-# buble-sort
+# Tic Tac Toe
 > Project built using basic Ruby.
   This project contains:
-- A method #bubble_sort that takes an array and returns a sorted array.
-- A similar method called #bubble_sort_by which sorts an array by accepting a block.
-
+  This is a console base Game build in ruby. And object oriented programing concepts is used in the project
 # What it does
-It takes two arays and sort them with different arguments.
+Two players needed to play thi game.
 
 ## Built With
 - Ruby
