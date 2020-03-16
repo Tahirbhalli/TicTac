@@ -12,4 +12,9 @@ def main
   end
   puts 'game over'
 end
-main
+
+loop do
+  main
+  puts 'do you want to play again'
+  main if gets.chomp == 'y' or gets.chomp == 'Y'
+end

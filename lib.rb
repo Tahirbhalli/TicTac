@@ -79,7 +79,6 @@ class Player < Tic
       indexes[i] = indexes[i] + 1 if indexes[i] == 3
       i += 1
     end
-    puts indexes
     indexes
   end
 end
