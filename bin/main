@@ -100,7 +100,7 @@ def main
   
   loop do
     main
-    puts 'do you want to play again'
+    puts 'do you want to play again (Y/N)'
     main if gets.chomp == 'y' or gets.chomp == 'Y'
   end
   
