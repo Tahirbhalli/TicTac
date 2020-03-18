@@ -9,7 +9,7 @@ Two players needed to play thi game.
 - Ruby
 
 # Start the Game 
--bin/main.rb is the executable file which will start the Game
+- bin/main.rb is the executable file which will start the Game
 - ruby bin/main.rb 
 
 ## Game instructions
