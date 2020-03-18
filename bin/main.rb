@@ -26,9 +26,9 @@ end
 
 loop do
   main
-  puts 'do you want to play again (Y/N)'
+  puts 'do you want to play again (y/n)'
   inp = gets.chomp
-  return if inp != 'y' or inp != 'Y'
+  return main if inp.downcase == 'y'
 
-  return main
+  break
 end
