@@ -10,12 +10,12 @@ Two players needed to play thi game.
 
 # Start the Game 
 -bin/main.rb is the executable file which will start the Game
--ruby bin/main.rb
+- ruby bin/main.rb 
 
 ## Game instructions
--player should input the row number(1-3)
--player should input the column number(1-3)
--Game will over if any player complete his simble in row or column or in diagnols
+- player should input the row number(1-3)
+- player should input the column number(1-3)
+- Game will over if any player complete his simble in row or column or in diagnols
 
 ## 🤝 Contributing
 
