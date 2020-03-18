@@ -93,6 +93,7 @@ def main
     i = 1
     loop do
       i += 1
+      puts "player" + ((i%2)+1).to_s + " turn"
       break if obj.turn(players[i % 2]) == true
     end
     puts 'game over'
