@@ -1,107 +1,117 @@
 #!/usr/bin/env ruby
 class Features
-    def initialize(_map)
-      _map = [[' ', '|', ' ', '|', ' '],
-              ['-----'],
-              [' ', '|', ' ', '|', ' '],
-              ['-----'],
-              [' ', '|', ' ', '|', ' ']]
+  def initialize(_map)
+    _map = [[' ', '|', ' ', '|', ' '],
+            ['-----'],
+            [' ', '|', ' ', '|', ' '],
+            ['-----'],
+            [' ', '|', ' ', '|', ' ']]
+  end
+
+  def isover?(map)
+    combinations = [[[0, 0], [0, 2], [0, 4]],
+                    [[2, 0], [2, 2], [2, 4]],
+                    [[4, 0], [4, 2], [4, 4]],
+                    [[0, 0], [2, 0], [4, 0]],
+                    [[0, 2], [2, 2], [4, 2]],
+                    [[0, 4], [2, 4], [4, 4]],
+                    [[0, 0], [2, 2], [4, 4]],
+                    [[0, 4], [2, 2], [4, 0]]]
+    combinations.each do |x|
+      next if map[x[0][0]][x[0][1]] == ' ' or map[x[1][0]][x[1][1]] == ' ' or map[x[2][0]][x[2][1]] == ' '
+      return true if map[x[0][0]][x[0][1]] == map[x[1][0]][x[1][1]] && map[x[1][0]][x[1][1]] == map[x[2][0]][x[2][1]]
     end
-  
-    def isover?(map)
-      combinations = [[[0, 0], [0, 2], [0, 4]], [[2, 0], [2, 2], [2, 4]], [[4, 0], [4, 2], [4, 4]], [[0, 0], [2, 0], [4, 0]],
-                      [[0, 2], [2, 2], [4, 2]], [[0, 4], [2, 4], [4, 4]], [[0, 0], [2, 2], [4, 4]], [[0, 4], [2, 2], [4, 0]]]
-      combinations.each do |x|
-        next if map[x[0][0]][x[0][1]] == ' ' or map[x[1][0]][x[1][1]] == ' ' or map[x[2][0]][x[2][1]] == ' '
-        return true if map[x[0][0]][x[0][1]] == map[x[1][0]][x[1][1]] && map[x[1][0]][x[1][1]] == map[x[2][0]][x[2][1]]
+    false
+  end
+end
+class Tic < Features
+  protected
+
+  @map = []
+  @simble = ''
+  attr_writer :simble
+
+  public
+
+  attr_reader :simble, :map
+
+  def initialize
+    @map = super @map
+  end
+
+  def display_map
+    @map.each do |x|
+      x.each do |y|
+        print y
       end
-      false
+      print "\n"
     end
   end
-  class Tic < Features
-    protected
-  
-    @map = []
-    @simble = ''
-    attr_writer :simble
-  
-    public
-  
-    attr_reader :simble, :map
-  
-    def initialize
-      @map = super @map
-    end
-  
-    def display_map
-      @map.each do |x|
-        x.each do |y|
-          print y
-        end
-        print "\n"
-      end
-    end
-  
-    def players_simble(players)
-      players[0].simble = '*'
-      players[1].simble = '$'
-    end
-  
-    def turn(player)
+
+  def players_simble(players)
+    players[0].simble = '*'
+    players[1].simble = '$'
+  end
+
+  def turn(player)
+    display_map
+    position = player.turn
+    return turn(player) if @map[position[0]][position[1]] != ' '
+
+    @map[position[0]][position[1]] = player.simble
+    if player.isover?(@map) == true
       display_map
-      position = player.turn
-      return turn(player) if @map[position[0]][position[1]] != ' '
-  
-      @map[position[0]][position[1]] = player.simble
-      if player.isover?(@map) == true
-        display_map
-        return true
-      end
-      false
+      return true
     end
+    false
   end
-  class Player < Tic
-    def initialize
-      super
-    end
-  
-    def turn
-      puts 'enter in range of 1-3'
-      print 'enter the row index'
-      x = gets.chomp.to_i
-      print 'enter the colomn index'
-      y = gets.chomp.to_i
-      indexes = [x, y]
-      i = 0
-      while i < 2
-        return turn if indexes[i] < 1 or indexes[i] > 3
-  
-        indexes[i] = indexes[i] - 1 if indexes[i] == 1
-        indexes[i] = indexes[i] + 1 if indexes[i] == 3
-        i += 1
-      end
-      indexes
-    end
+end
+class Player < Tic
+  def initialize
+    super
   end
-  
-def main
-    obj = Tic.new
-    player1 = Player.new
-    player2 = Player.new
-    players = [player1, player2]
-    obj.players_simble(players)
-    i = 1
-    loop do
+
+  def turn
+    puts 'enter in range of 1-3'
+    print 'enter the row index'
+    x = gets.chomp.to_i
+    print 'enter the colomn index'
+    y = gets.chomp.to_i
+    indexes = [x, y]
+    i = 0
+    while i < 2
+      return turn if indexes[i] < 1 or indexes[i] > 3
+
+      indexes[i] = indexes[i] - 1 if indexes[i] == 1
+      indexes[i] = indexes[i] + 1 if indexes[i] == 3
       i += 1
-      puts "player" + ((i%2)+1).to_s + " turn"
-      break if obj.turn(players[i % 2]) == true
     end
-    puts 'game over'
+    indexes
   end
-  
+end
+
+def main
+  obj = Tic.new
+  player1 = Player.new
+  player2 = Player.new
+  players = [player1, player2]
+  obj.players_simble(players)
+  i = 1
   loop do
-    main
-    puts 'do you want to play again (Y/N)'
-    main if gets.chomp == 'y' or gets.chomp == 'Y'
+    i += 1
+    puts 'player' + ((i % 2) + 1).to_s + ' turn'
+    break if obj.turn(players[i % 2]) == true
   end
-  
+  puts 'game over'
+end
+
+loop do
+  main
+  puts 'do you want to play again (Y/N)'
+  if gets.chomp == 'y' or gets.chomp == 'Y'
+    main
+  else
+    puts 'press enter to leave the game'
+    break
+  end
+end
