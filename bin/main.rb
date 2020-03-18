@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
-require_relative '../lib/lib.rb'
+require_relative '../lib/tic.rb'
+require_relative '../lib/players.rb'
+
 def main
   obj = Tic.new
   player1 = Player.new
@@ -10,17 +12,23 @@ def main
   loop do
     i += 1
     puts 'player' + ((i % 2) + 1).to_s + ' turn'
-    return if obj.turn(players[i % 2], i % 2)
+    res = obj.turn(players[i % 2])
+    if res == 2
+      puts 'player ' + ((i % 2) + 1).to_s + ' wins'
+      return
+    end
+    if res == 1
+      puts 'game draw'
+      return
+    end
   end
 end
 
 loop do
   main
   puts 'do you want to play again (Y/N)'
-  if gets == 'y' or gets == 'Y'
-    main
-  else
-    puts 'press enter to leave the game'
-    return
-  end
+  inp = gets.chomp
+  return if inp != 'y' or inp != 'Y'
+
+  return main
 end
