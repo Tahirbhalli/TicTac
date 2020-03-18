@@ -28,14 +28,11 @@ class Tic < Features
     players[1].simble = '$'
   end
 
-  def turn(player)
-    display_map
-    position = player.turn
-    return turn(player) if @map[position[0]][position[1]] != ' '
-
+  def turn(player, position)
     @map[position[0]][position[1]] = player.simble
-    return 2 if player.isover?(@map) == true
-    return 1 if player.isdraw?(@map)
+    display_map
+    return 2 if isover?(@map) == true
+    return 1 if isdraw?(@map)
 
     0
   end
