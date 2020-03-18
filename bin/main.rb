@@ -26,7 +26,6 @@ class Player < Tic
   end
 end
 
-
 def main
   obj = Tic.new
   player1 = Player.new
