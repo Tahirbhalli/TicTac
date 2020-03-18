@@ -10,7 +10,7 @@ Two players needed to play thi game.
 
 # Start the Game 
 -bin/main.rb is the executable file which will start the Game
--ruby bin/main.rb
+- ruby bin/main.rb 
 
 ## Game instructions
 -player should input the row number(1-3)
