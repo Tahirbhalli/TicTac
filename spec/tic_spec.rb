@@ -13,7 +13,7 @@ def preprocess(indexes)
     i += 1
   end
   indexes
-  end
+end
 describe Tic do
   it 'impleess'
   tic = Tic.new
@@ -21,8 +21,8 @@ describe Tic do
   p2 = Player.new
   players = [p1, p2]
   tic.players_simble(players)
-  p1.simble.should == '*'
-  p2.simble.should == '$'
+  p1.simble.should.equal? '*'
+  p2.simble.should.equal? '$'
   draw_pattern = [[1, 1], [2, 1], [2, 2], [3, 3], [3, 1], [1, 3], [2, 3], [3, 2], [1, 2]]
   win_pattern = [[1, 1], [2, 1], [2, 2], [3, 1], [3, 3]]
   i = 1
@@ -32,7 +32,7 @@ describe Tic do
     tic.turn(players[i % 2], preprocess(a)).should == 1 if i == 11 # last iteration where game draws
     tic.turn(players[i % 2], preprocess(a))
   end
-  i=1
+  i = 1
   win_pattern.each do |a|
     i += 1
     tic.turn(players[i % 2], preprocess(a)).should == 2 if i == 5 # last iteration where game wins
