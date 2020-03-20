@@ -17,17 +17,14 @@ end
 
 def gameobj(player)
   tic = Tic.new
-  p1 = Player.new
-  p2 = Player.new
-  
   tic.players_simble(player)
   tic
 end
-p1=Player.new
-p2=Player.new
+p1 = Player.new
+p2 = Player.new
 describe Tic do
   it 'draw combination' do
-    players=[p1,p2]
+    players = [p1, p2]
     tic = gameobj players
     draw_pattern = [[1, 1], [2, 1], [2, 2], [3, 3], [3, 1], [1, 3], [2, 3], [3, 2], [1, 2]]
     i = 1
@@ -43,7 +40,7 @@ describe Tic do
     end
   end
   it 'win combination' do
-    players=[p1,p2]
+    players = [p1, p2]
     tic = gameobj players
     win_pattern = [[1, 1], [2, 1], [2, 2], [3, 1], [3, 3]]
     i = 1
