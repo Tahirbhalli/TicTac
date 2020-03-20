@@ -14,28 +14,42 @@ def preprocess(indexes)
   end
   indexes
 end
+
+def gameobj(player)
+  tic = Tic.new
+  p1 = Player.new
+  p2 = Player.new
+  
+  tic.players_simble(player)
+  tic
+end
+p1=Player.new
+p2=Player.new
 describe Tic do
-  it 'impleess' do
-    tic = Tic.new
-    p1 = Player.new
-    p2 = Player.new
-    players = [p1, p2]
-    tic.players_simble(players)
-    p1.simble.should.equal? '*'
-    p2.simble.should.equal? '$'
+  it 'draw combination' do
+    players=[p1,p2]
+    tic = gameobj players
     draw_pattern = [[1, 1], [2, 1], [2, 2], [3, 3], [3, 1], [1, 3], [2, 3], [3, 2], [1, 2]]
-    win_pattern = [[1, 1], [2, 1], [2, 2], [3, 1], [3, 3]]
     i = 1
     draw_pattern.each do |a|
       i += 1
 
-      tic.turn(players[i % 2], preprocess(a)).should == 1 if i == 11 # last iteration where game draws
+      if i == 12 # last iteration where game draws
+        tic.turn(players[i % 2], preprocess(a)).should.equal? 1
+        tic = nil
+        break
+      end
       tic.turn(players[i % 2], preprocess(a))
     end
+  end
+  it 'win combination' do
+    players=[p1,p2]
+    tic = gameobj players
+    win_pattern = [[1, 1], [2, 1], [2, 2], [3, 1], [3, 3]]
     i = 1
     win_pattern.each do |a|
       i += 1
-      tic.turn(players[i % 2], preprocess(a)).should == 2 if i == 5 # last iteration where game wins
+      tic.turn(players[i % 2], preprocess(a)).should == 2 if i == 7 # last iteration where game wins
       tic.turn(players[i % 2], preprocess(a))
     end
   end
