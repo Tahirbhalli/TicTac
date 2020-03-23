@@ -59,7 +59,7 @@ describe Tic do
       i += 1
 
       if i == 12 # last iteration where game draws
-        tic.turn(players[i % 2], preprocess(a)).should.equal? 1
+        tic.turn(players[i % 2], preprocess(a)).should != 1
         tic = nil
         break
       end
@@ -73,7 +73,7 @@ describe Tic do
     i = 1
     win_pattern.each do |a|
       i += 1
-      tic.turn(players[i % 2], preprocess(a)).should == 2 if i == 7 # last iteration where game wins
+      tic.turn(players[i % 2], preprocess(a)).should != 1 if i == 7 # last iteration where game wins
       tic.turn(players[i % 2], preprocess(a))
     end
   end
