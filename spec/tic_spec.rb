@@ -1,6 +1,6 @@
-require 'spec_helper'
-require '../lib/tic'
-require '../lib/players'
+require_relative 'spec_helper'
+require_relative '../lib/tic'
+require_relative '../lib/players'
 def preprocess(indexes)
   i = 0
   while i < 2
@@ -28,53 +28,47 @@ describe Tic do
     tic = gameobj players
     draw_pattern = [[1, 1], [2, 1], [2, 2], [3, 3], [3, 1], [1, 3], [2, 3], [3, 2], [1, 2]]
     i = 1
+    num = -1
     draw_pattern.each do |a|
       i += 1
-
-      if i == 12
-        expect(tic.turn(players[i % 2], preprocess(a)).should.equal?(1)).to eql(true)
-        tic = nil
-        break
-      end
-      tic.turn(players[i % 2], preprocess(a))
+      num = tic.turn(players[i % 2], preprocess(a))
     end
+    expect(num.equal?(1)).to eq(true)
   end
   it 'win combination' do
     players = [p1, p2]
     tic = gameobj players
     win_pattern = [[1, 1], [2, 1], [2, 2], [3, 1], [3, 3]]
     i = 1
+    num = -1
     win_pattern.each do |a|
       i += 1
-      expect(tic.turn(players[i % 2], preprocess(a)).should == 2).to eql(true) if i == 7
-      tic.turn(players[i % 2], preprocess(a))
+      num = tic.turn(players[i % 2], preprocess(a))
     end
+    expect(num.equal?(2)).to eq(true)
   end
   it 'not win combination' do
     players = [p1, p2]
     tic = gameobj players
     draw_pattern = [[1, 1], [2, 1], [2, 2], [3, 3], [3, 1], [1, 3], [2, 3], [3, 2], [1, 2]]
     i = 1
+    num = -1
     draw_pattern.each do |a|
       i += 1
-
-      if i == 12
-        expect(tic.turn(players[i % 2], preprocess(a)).should.equal?(2)).to eq(false)
-        tic = nil
-        break
-      end
-      tic.turn(players[i % 2], preprocess(a))
+      num = tic.turn(players[i % 2], preprocess(a))
     end
+    expect(num.equal?(2)).to eq(false)
   end
   it 'not draw combination' do
     players = [p1, p2]
     tic = gameobj players
     win_pattern = [[1, 1], [2, 1], [2, 2], [3, 1], [3, 3]]
     i = 1
+    num = -1
     win_pattern.each do |a|
       i += 1
-      expect(tic.turn(players[i % 2], preprocess(a)).should == 1).to eql(false) if i == 7
-      tic.turn(players[i % 2], preprocess(a))
+      num = tic.turn(players[i % 2], preprocess(a))
     end
+    expect(num.equal?(1)).to eq(false)
   end
 end
