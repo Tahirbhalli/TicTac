@@ -22,13 +22,15 @@ def gameobj(player)
 end
 
 describe Tic do
-  tic = Tic.new # use let give error because it is not used in it
+  let(:tic) { Tic.new } # use let give error because it is not used in it
   p1 = Player.new # use let give error because it is not used in it
   p2 = Player.new # use let give error because it is not used in it
   let(:num) { -1 }
-  players = [p1, p2]
-  tic.players_simble(players)
+
   it 'draw combination' do
+    tic = Tic.new
+    players = [p1, p2]
+    tic.players_simble(players)
     draw_pattern = [[1, 1], [2, 1], [2, 2], [3, 3], [3, 1], [1, 3], [2, 3], [3, 2], [1, 2]]
     i = 1
     num = -1
@@ -39,6 +41,9 @@ describe Tic do
     expect(num.equal?(1)).to eq(true)
   end
   it 'win combination' do
+    tic = Tic.new
+    players = [p1, p2]
+    tic.players_simble(players)
     win_pattern = [[1, 1], [2, 1], [2, 2], [3, 1], [3, 3]]
     i = 1
     num = -1
@@ -49,6 +54,9 @@ describe Tic do
     expect(num.equal?(2)).to eq(true)
   end
   it 'not win combination' do
+    tic = Tic.new
+    players = [p1, p2]
+    tic.players_simble(players)
     draw_pattern = [[1, 1], [2, 1], [2, 2], [3, 3], [3, 1], [1, 3], [2, 3], [3, 2], [1, 2]]
     i = 1
     num = -1
@@ -59,6 +67,9 @@ describe Tic do
     expect(num.equal?(2)).to eq(false)
   end
   it 'not draw combination' do
+    tic = Tic.new
+    players = [p1, p2]
+    tic.players_simble(players)
     win_pattern = [[1, 1], [2, 1], [2, 2], [3, 1], [3, 3]]
     i = 1
     num = -1
