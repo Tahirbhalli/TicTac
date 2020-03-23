@@ -31,7 +31,7 @@ describe Tic do
     draw_pattern.each do |a|
       i += 1
 
-      if i == 12 # last iteration where game draws
+      if i == 12
         expect(tic.turn(players[i % 2], preprocess(a)).should.equal?(1)).to eql(true)
         tic = nil
         break
@@ -58,7 +58,7 @@ describe Tic do
     draw_pattern.each do |a|
       i += 1
 
-      if i == 12 # last iteration where game draws
+      if i == 12
         expect(tic.turn(players[i % 2], preprocess(a)).should.equal?(2)).to eq(false)
         tic = nil
         break
