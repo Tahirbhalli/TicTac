@@ -23,8 +23,8 @@ end
 
 describe Tic do
   tic = Tic.new
-  p1 = Player.new
-  p2 = Player.new
+  p1 = Player.new # use let give error because it is not used in it
+  p2 = Player.new # use let give error because it is not used in it
   let(:num) { -1 }
   players = [p1, p2]
   tic.players_simble(players)
