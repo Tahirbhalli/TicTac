@@ -22,7 +22,7 @@ def gameobj(player)
 end
 
 describe Tic do
-  tic = Tic.new
+  tic = Tic.new # use let give error because it is not used in it
   p1 = Player.new # use let give error because it is not used in it
   p2 = Player.new # use let give error because it is not used in it
   let(:num) { -1 }
