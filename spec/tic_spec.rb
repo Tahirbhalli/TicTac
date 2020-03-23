@@ -20,24 +20,25 @@ def gameobj(player)
   tic.players_simble(player)
   tic
 end
-p1 = Player.new
-p2 = Player.new
+
 describe Tic do
+  tic=Tic.new
+  p1=Player.new
+  p2=Player.new
+  let(:num){-1}
+  players = [p1, p2]
+  tic.players_simble(players)
   it 'draw combination' do
-    players = [p1, p2]
-    tic = gameobj players
     draw_pattern = [[1, 1], [2, 1], [2, 2], [3, 3], [3, 1], [1, 3], [2, 3], [3, 2], [1, 2]]
     i = 1
-    num = -1
+    num=-1
     draw_pattern.each do |a|
       i += 1
       num = tic.turn(players[i % 2], preprocess(a))
     end
-    expect(num.equal?(1)).to eq(true)
+    expect(num.equal? 1).to eq(true)
   end
   it 'win combination' do
-    players = [p1, p2]
-    tic = gameobj players
     win_pattern = [[1, 1], [2, 1], [2, 2], [3, 1], [3, 3]]
     i = 1
     num = -1
@@ -48,8 +49,6 @@ describe Tic do
     expect(num.equal?(2)).to eq(true)
   end
   it 'not win combination' do
-    players = [p1, p2]
-    tic = gameobj players
     draw_pattern = [[1, 1], [2, 1], [2, 2], [3, 3], [3, 1], [1, 3], [2, 3], [3, 2], [1, 2]]
     i = 1
     num = -1
@@ -60,8 +59,6 @@ describe Tic do
     expect(num.equal?(2)).to eq(false)
   end
   it 'not draw combination' do
-    players = [p1, p2]
-    tic = gameobj players
     win_pattern = [[1, 1], [2, 1], [2, 2], [3, 1], [3, 3]]
     i = 1
     num = -1
