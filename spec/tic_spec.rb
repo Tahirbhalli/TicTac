@@ -50,4 +50,31 @@ describe Tic do
       tic.turn(players[i % 2], preprocess(a))
     end
   end
+  it 'not win combination' do
+    players = [p1, p2]
+    tic = gameobj players
+    draw_pattern = [[1, 1], [2, 1], [2, 2], [3, 3], [3, 1], [1, 3], [2, 3], [3, 2], [1, 2]]
+    i = 1
+    draw_pattern.each do |a|
+      i += 1
+
+      if i == 12 # last iteration where game draws
+        tic.turn(players[i % 2], preprocess(a)).should.equal? 1
+        tic = nil
+        break
+      end
+      tic.turn(players[i % 2], preprocess(a))
+    end
+  end
+  it 'not draw combination' do
+    players = [p1, p2]
+    tic = gameobj players
+    win_pattern = [[1, 1], [2, 1], [2, 2], [3, 1], [3, 3]]
+    i = 1
+    win_pattern.each do |a|
+      i += 1
+      tic.turn(players[i % 2], preprocess(a)).should == 2 if i == 7 # last iteration where game wins
+      tic.turn(players[i % 2], preprocess(a))
+    end
+  end
 end
