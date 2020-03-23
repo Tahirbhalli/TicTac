@@ -30,7 +30,7 @@ class Tic < Features
 
   def turn(player, position)
     @map[position[0]][position[1]] = player.simble
-    display_map
+    # display_map coment for testing
     return 2 if isover?(@map) == true
     return 1 if isdraw?(@map)
 
